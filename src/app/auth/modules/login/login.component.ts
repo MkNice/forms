@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy } from '@angular/compiler';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { takeUntil, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { DestroyService } from 'src/app/shared/services/destroy.service';
 
@@ -32,6 +33,15 @@ export class LoginComponent {
   }
 
   public onSubmit() {
-
+    this.auth.login(this.dataFormGroup.value)
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((err) => {
+          return throwError(() => new Error(err));
+        })
+      )
+      .subscribe(() => {
+        this.router.navigate(['/dashboard']);
+      });
   }
 }

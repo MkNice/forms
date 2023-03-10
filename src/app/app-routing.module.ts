@@ -4,17 +4,15 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
+  { path: '', loadChildren: () => import('./auth/modules/login/login.module').then(m => m.LoginModule) },
+
   {
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
     canActivate: [AuthGuard],
   },
-  {
-    path: '',
-    loadChildren: () =>
-      import('./auth/auth.module').then((m) => m.AuthModule),
-  },
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
 
   { path: '**', component: NotFoundComponent },
 ];

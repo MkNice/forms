@@ -1,2 +1,31 @@
-<h1>Registration</h1>
-<input type="emai" /> <input type="password" /> Some <button>Click me</button>
+<section class="auth">
+  <div class="form-wrapper">
+    <form class="auth-form" [formGroup]="dataFormGroup">
+      <mat-form-field class="input">
+        <mat-label>Email</mat-label>
+        <input
+          maxlength="50"
+          placeholder="Email"
+          matInput
+          formControlName="email"
+          autocomplete="on"
+        />
+      </mat-form-field>
+      <mat-form-field class="input">
+        <mat-label>Password</mat-label>
+        <input
+          passwordTogle
+          type="password"
+          name="password"
+          maxlength="16"
+          matInput
+          placeholder="Password"
+          formControlName="password"
+          autocomplete="on"
+        />
+      </mat-form-field>
+
+      <button class="btn btn-primary" (click)="onSubmit()">Войти</button>
+    </form>
+  </div>
+</section>

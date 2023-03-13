@@ -14,7 +14,7 @@ import { DestroyService } from 'src/app/shared/services/destroy.service';
 })
 export class LoginComponent {
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private router: Router,
     private readonly destroy$: DestroyService,
   ) { }
@@ -33,14 +33,18 @@ export class LoginComponent {
   }
 
   public onSubmit() {
-    this.auth.login(this.dataFormGroup.value)
+    this.authService.login(this.dataFormGroup.value)
       .pipe(
         takeUntil(this.destroy$),
         catchError((err) => {
           return throwError(() => new Error(err));
         })
       )
-      .subscribe(() => {
+      .subscribe((userData) => {
+        this.authService.userData = userData;
+        
+        localStorage.setItem('userData', JSON.stringify(userData));
+        this.authService.isLoggedIn = true;
         this.router.navigate(['/dashboard']);
       });
   }

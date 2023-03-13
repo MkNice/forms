@@ -6,6 +6,11 @@ import { DashboardComponent } from './dashboard.component';
 import { FormsComponent } from './forms/forms.component';
 import { SharedModule } from '../shared/shared.module';
 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -16,6 +21,11 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatPaginatorModule,
   ],
   exports: [
     FormsComponent,

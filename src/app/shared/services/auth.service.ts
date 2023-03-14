@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ChangeDetectorRef, Injectable } from '@angular/core';
-import { environment } from 'src/app/environments/environment.prod';
-import { IFormsData } from '../interfaces/auth.interface';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { Observable } from 'rxjs';
+import { IAuthFieldsData, IForms, IPaginationData } from '../interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,15 @@ export class AuthService {
 
   constructor(private readonly http: HttpClient) { }
 
-  public login(dataForm: IFormsData) {
+  public login(dataForm: IAuthFieldsData) {
     const body = {
       email: dataForm.email,
       password: dataForm.password,
     };
 
-    return this.http.post('/auth/login', body);
+    const url = '/auth/login';
+
+    return this.http.post(url, body);
   }
 
   public logout() {
@@ -26,11 +29,11 @@ export class AuthService {
 
     return this.http.post('/auth/logout', {},);
   }
+  //  let url = '/forms?page=1&per_page=20&order_by=id&order_direction=asc';
+  public getForms(params: PageEvent | IPaginationData): Observable<IForms> {
+    const url = `/forms?page=${params.pageIndex}&per_page=${params.pageSize}`;
 
-  public getForms() {
-
-  
-    return this.http.get('/form_fields?page=1&per_page=20&order_by=id&order_direction=asc')
+    return this.http.get<IForms>(url);
   }
 }
 

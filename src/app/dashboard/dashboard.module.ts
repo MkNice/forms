@@ -11,11 +11,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     FormsComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,

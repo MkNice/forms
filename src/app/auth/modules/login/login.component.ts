@@ -42,7 +42,6 @@ export class LoginComponent {
       )
       .subscribe((userData) => {
         this.authService.userData = userData;
-        
         localStorage.setItem('userData', JSON.stringify(userData));
         this.authService.isLoggedIn = true;
         this.router.navigate(['/dashboard']);

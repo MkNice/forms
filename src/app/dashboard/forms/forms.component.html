@@ -4,15 +4,10 @@
   <div class="wrapper">
     <div class="header">
       <p class="id">Id</p>
-      <p class="title">Title</p>
-      <p class="type">type</p>
-      <p class="min-max">min</p>
-      <p class="min-max">max</p>
-      <p class="max-length">max length</p>
-      <p class="is-required">is required</p>
-      <p class="order">order</p>
-      <p class="created-data">created at</p>
-      <p class="created-data">updated at</p>
+      <p class="user-id">User id</p>
+      <p class="type">Type</p>
+      <p class="created-data">Created at</p>
+      <p class="created-data">Updated at</p>
     </div>
 
     <div
@@ -24,26 +19,11 @@
       <div class="row-cell id">
         <p class="row-cell-text">{{ form.id }}</p>
       </div>
-
-      <div class="row-cell min-max">
-        <p class="row-cell-text">{{ form.title }}</p>
+      <div class="row-cell user-id">
+        <p class="row-cell-text">{{ form.user_id }}</p>
       </div>
-
-      <div class="row-cell type">{{ form.type }}</div>
-      <div class="row-cell min-max">
-        <p class="row-cell-text">{{ form.min }}</p>
-      </div>
-      <div class="row-cell min-max">
-        <p class="row-cell-text">{{ form.max }}</p>
-      </div>
-      <div class="row-cell max-length">
-        <p class="row-cell-text">{{ form.max_length }}</p>
-      </div>
-      <div class="row-cell is-required">
-        <p class="row-cell-text">{{ form.is_required }}</p>
-      </div>
-      <div class="row-cell order">
-        <p class="row-cell-text">{{ form.order }}</p>
+      <div class="row-cell type">
+        <p class="row-cell-text">{{ form.type }}</p>
       </div>
       <div class="row-cell created-data">
         {{ form.created_at | date : "short" }}
@@ -55,13 +35,13 @@
   </div>
 </div>
 <div class="pagination">
-  <mat-paginator
-    (page)="onPageChange($event)"
-    [length]="100"
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 25, 100]"
+  <app-pagination
+    [itemsPerPage]="paginationDefaultValues.pageSize"
+    [maxSizePages]="paginationDefaultValues.maxSizePages"
+    [collectionSize]="paginationDefaultValues.collectionSize"
+    (nextPage)="pagination($event)"
   >
-  </mat-paginator>
+  </app-pagination>
 </div>
 
 <div

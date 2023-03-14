@@ -2,13 +2,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChil
 import { MatMenuTrigger } from '@angular/material/menu';
 import { PageEvent } from '@angular/material/paginator';
 import { takeUntil } from 'rxjs';
+import { IForms, IFormsData, IPaginationData } from 'src/app/shared/interfaces/auth.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { DestroyService } from 'src/app/shared/services/destroy.service';
 
-interface IFormsData {
-  data: any[];
-  meta: any[];
-}
 
 @Component({
   selector: 'app-forms',
@@ -21,22 +18,40 @@ interface IFormsData {
 export class FormsComponent implements OnInit {
   @ViewChild(MatMenuTrigger) matMenuTrigger!: MatMenuTrigger;
 
-  public formsData: any;
+  public formsData!: IFormsData[];
 
   public menuTopLeftPosition = { x: '0', y: '0' };
+
+  public paginationDefaultValues: IPaginationData = {
+    pageSize: 5,
+    maxSizePages: [5, 10, 25, 50],
+    collectionSize: 65, //! fix
+    pageIndex: 1,
+  };
 
   constructor(private authService: AuthService, private destroy$: DestroyService, private changeDetector: ChangeDetectorRef) { }
 
   public ngOnInit(): void {
-    this.authService.getForms().pipe(takeUntil(this.destroy$)).subscribe((formsData: any) => {
-      this.formsData = formsData.data;
-      this.changeDetector.detectChanges();
-    });
+    this.getDataForms();
+  }
+
+  public pagination(pageData: PageEvent): void {
+    this.paginationDefaultValues.pageIndex = pageData.pageIndex++;
+
+    this.authService.getForms(pageData)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe((formsData: IForms) => {
+        this.formsData = formsData.data;
+        this.changeDetector.detectChanges();
+      });
   }
 
   public sortByDate(): void {
     console.log('sort');
   }
+
   public closeMenu(): void {
     this.matMenuTrigger.closeMenu();
   }
@@ -54,8 +69,14 @@ export class FormsComponent implements OnInit {
     }, 200);
   }
 
-  public onPageChange(event: PageEvent) {
-    console.log(event);
-    // Здесь можно загрузить данные для новой страницы
+  private getDataForms(): void {
+    this.authService.getForms(this.paginationDefaultValues)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe((formsData: IForms) => {
+        this.formsData = formsData.data;
+        this.changeDetector.detectChanges();
+      });
   }
 }

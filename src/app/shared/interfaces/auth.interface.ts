@@ -32,9 +32,32 @@ export type IFormFieldValues = Pick<IFormsData, 'id' | 'type' | 'created_at' | '
   value: string,
 };
 
-export interface IPaginationData {
+export interface IParams {
   pageSize: number,
   maxSizePages: number[],
-  collectionSize: number,
+  length: number,
   pageIndex: number,
+  search: string,
+  filterByOrder: string,
+  filterByData: string,
+}
+
+export interface IUser {
+  created_at: string;
+  email: string;
+  email_verified_at: string | null;
+  id: number;
+  is_active: boolean;
+  is_admin: boolean | null;
+  name: string;
+  type: string;
+  updated_at: string;
+};
+
+export interface IUserData {
+  access_token: string;
+  expires_in: number;
+  refresh_in: number;
+  token_type: string;
+  user: IUser;
 }

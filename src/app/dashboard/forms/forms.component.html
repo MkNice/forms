@@ -1,9 +1,12 @@
-<app-search></app-search>
+<div class="filters">
+  <app-search (searchValueChanged)="getFormDataBySearch($event)"></app-search>
+  <app-filter (filterValueChanged)="getFormDataByFilter($event)"></app-filter>
+</div>
 
 <div class="table">
   <div class="wrapper">
     <div class="header">
-      <p class="id">Id</p>
+      <p class="id" (click)="changeOrderDirection()">Id</p>
       <p class="user-id">User id</p>
       <p class="type">Type</p>
       <p class="created-data">Created at</p>
@@ -14,7 +17,7 @@
       class="row"
       *ngFor="let form of formsData"
       (click)="closeMenu()"
-      (contextmenu)="onRightClick($event)"
+      (contextmenu)="onRightClick($event, form)"
     >
       <div class="row-cell id">
         <p class="row-cell-text">{{ form.id }}</p>
@@ -26,7 +29,7 @@
         <p class="row-cell-text">{{ form.type }}</p>
       </div>
       <div class="row-cell created-data">
-        {{ form.created_at | date : "short" }}
+        {{ form.created_at }}
       </div>
       <div class="row-cell created-data">
         {{ form.updated_at | date : "short" }}
@@ -34,11 +37,12 @@
     </div>
   </div>
 </div>
+
 <div class="pagination">
   <app-pagination
-    [itemsPerPage]="paginationDefaultValues.pageSize"
-    [maxSizePages]="paginationDefaultValues.maxSizePages"
-    [collectionSize]="paginationDefaultValues.collectionSize"
+    [itemsPerPage]="paramsForApi.pageSize"
+    [maxSizePages]="paramsForApi.maxSizePages"
+    [collectionSize]="paramsForApi.length"
     (nextPage)="pagination($event)"
   >
   </app-pagination>
@@ -52,7 +56,7 @@
 ></div>
 
 <mat-menu #menu="matMenu" [hasBackdrop]="false">
-  <button mat-menu-item>Создать форму</button>
-  <button mat-menu-item>Редактировать форму</button>
-  <button mat-menu-item>Удалить форму</button>
+  <button mat-menu-item (click)="actionForms('create')">Создать форму</button>
+  <button mat-menu-item (click)="actionForms('edit')">Редактировать форму</button>
+  <button mat-menu-item (click)="deleteForm()">Удалить форму</button>
 </mat-menu>

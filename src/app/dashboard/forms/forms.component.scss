@@ -2,12 +2,18 @@ p {
   margin: 0;
 }
 
+.filters{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .table {
   overflow: auto;
   border: 1px solid grey;
   border-radius: 15px;
-  max-width: 1900px;
-
+  max-width: 1400px;
+  margin: 0 auto;
   overflow-y: auto;
   max-height: calc(100vh - 120px - 120px - 50px - 20px);
 
@@ -57,6 +63,7 @@ p {
 
   .id {
     width: 25%;
+    cursor: pointer;
   }
 
   .user-id {
@@ -68,9 +75,10 @@ p {
   }
 
   .created-data {
-    width: 50%;
+    width: 29%;
   }
 }
+
 .pagination{
   display: flex;
   justify-content: center;

@@ -1,0 +1,14 @@
+<form class="form-filter" [formGroup]="filterField">
+  <mat-form-field style="width: 50%">
+    <mat-label>Filter</mat-label>
+    <input matInput class="form-filter-input" formControlName="filter" placeholder=">=2020.10.19" />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    style="margin-left: 15px"
+    (click)="emitFilterField()"
+  >
+    Ok
+  </button>
+</form>

@@ -1,24 +1,22 @@
-.dialog {
-  padding: 40px
-}
+:host {
+  padding: 40px;
+  .inputs-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .item {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
 
-.inputs-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  &:first-child {
-    margin-right: 15px;
+      &:first-child {
+        margin-right: 15px;
+      }
+    }
   }
 }
 
-.btns{
+.btns {
   display: flex;
   justify-content: space-around;
   align-items: center;

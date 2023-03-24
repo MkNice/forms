@@ -21,9 +21,10 @@ export class HeaderComponent {
       .pipe(takeUntil(this.destroy$),
         catchError((err) => {
           return throwError(() => new Error(err));
-        })).subscribe(() => {
-          this.authService.isLoggedIn = false;
-          this.router.navigate(['']);
-        });
+        }))
+      .subscribe(() => {
+        this.authService.isLoggedIn = false;
+        this.router.navigate(['']);
+      });
   }
 }

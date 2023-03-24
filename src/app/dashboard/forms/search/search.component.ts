@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -9,12 +9,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 
 export class SearchComponent {
-  public searchField = new FormGroup({ search: new FormControl('') });
+  public searchField = new FormControl('');
 
   @Output() public searchValueChanged: EventEmitter<string> = new EventEmitter<string>();
 
   public emitSearchField(): void {
-    const searchField = this.searchField.value.search;
+    const searchField = this.searchField.value;
     searchField && this.searchValueChanged.emit(searchField);
   }
 }

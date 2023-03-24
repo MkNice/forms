@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
@@ -8,12 +8,12 @@ import { FormControl, FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterComponent {
-  public filterField = new FormGroup({ filter: new FormControl('') });
+  public filterField = new FormControl('');
 
   @Output() public filterValueChanged: EventEmitter<string> = new EventEmitter<string>();
 
   public emitFilterField(): void {
-    const filterField = this.filterField.value.filter;
+    const filterField = this.filterField.value;
 
     filterField && this.filterValueChanged.emit(filterField);
   }

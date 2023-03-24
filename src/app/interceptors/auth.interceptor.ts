@@ -13,12 +13,16 @@ import { AuthService } from '../shared/services/auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const auth = inject(AuthService);
+  constructor(private auth: AuthService) {}
 
-    const headers = new HttpHeaders({
-      'Authorization': `${auth.userData.token_type} ${auth.userData.access_token}`
-    });
+  public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    let headers: HttpHeaders | undefined;
+
+    if (this.auth.userData) {
+      headers = new HttpHeaders({
+        'Authorization': `${this.auth.userData.token_type} ${this.auth.userData.access_token}`
+      });
+    }
 
     return next.handle(
       request.clone({

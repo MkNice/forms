@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IAuthFieldsData, IUserData } from '../interfaces/auth.interface';
+import { Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+import { IUserData } from '../interfaces/auth.interface';
+import { AuthApiService } from './auth-api.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +12,17 @@ export class AuthService {
   public isLoggedIn = false;
   public userData!: IUserData;
 
-  constructor(private readonly http: HttpClient) { }
-
-  public login(dataForm: IAuthFieldsData): Observable<IUserData> {
-    const body = {
-      email: dataForm.email,
-      password: dataForm.password,
-    };
-
-    const url = '/auth/login';
-
-    return this.http.post<IUserData>(url, body);
+  constructor(private authApi: AuthApiService, private localStorageService: LocalStorageService, private router: Router) {
+    const data = this.localStorageService.getData('userData');
+    this.userData = data as IUserData;
+    this.isLoggedIn = !!data;
+    this.isLoggedIn && this.router.navigate(['/dashboard']);
   }
 
-  public logout() {
-    return this.http.post('/auth/logout', {},);
+  public logout(): Observable<any> {
+    return this.authApi.logout()
+      .pipe(
+        tap(() => this.localStorageService.clearData())
+      );
   }
 }

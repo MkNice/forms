@@ -58,9 +58,10 @@ export class FormsComponent implements OnInit {
 
   public getFormDataByFilter(event: string): void {
     this.paramsForApi.filterByData = event;
-    this.formsApi.getForms(this.paramsForApi).pipe(
-      takeUntil(this.destroy$)
-    )
+    this.formsApi.getForms(this.paramsForApi)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
       .subscribe((formsData: IForms) => {
         this.formsData = formsData.data;
         this.paramsForApi.length = formsData.meta.total_items_count;
@@ -81,7 +82,7 @@ export class FormsComponent implements OnInit {
   }
 
   public pagination(pageData: PageEvent): void {
-    this.paramsForApi.pageIndex = pageData.pageIndex++;
+    this.paramsForApi.pageIndex = pageData.pageIndex + 1;
     this.paramsForApi.pageSize = pageData.pageSize;
 
     this.formsApi.getForms(this.paramsForApi)
@@ -104,9 +105,10 @@ export class FormsComponent implements OnInit {
       }
     })
       .afterClosed()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$)
+      )
       .subscribe((optionsDialogData: IOptionsDialogData) => {
-        console.log(optionsDialogData);
         if (action === 'edit') {
           optionsDialogData.valueForChange &&
             this.formsApi.patchFormValues(optionsDialogData)
@@ -157,6 +159,7 @@ export class FormsComponent implements OnInit {
 
     this.currentFormFieldValues = formData.form_field_values;
     this.currentFormId = formData.id;
+
     this.matMenuTrigger.menuOpen && this.matMenuTrigger.closeMenu();
 
     this.menuTopLeftPosition.x = event.clientX + 'px';

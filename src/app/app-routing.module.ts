@@ -13,6 +13,7 @@ const routes: Routes = [
     canActivate: [isAuth],
   },
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: 'form', loadChildren: () => import('./dashboard/forms/form/form.module').then(m => m.FormModule) },
 
   { path: '**', component: NotFoundComponent },
 ];

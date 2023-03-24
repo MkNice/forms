@@ -1,14 +1,7 @@
-<form class="form-search" [formGroup]="searchField">
-  <mat-form-field style="width: 50%">
-    <mat-label>Search</mat-label>
-    <input matInput class="form-search-input" formControlName="search" />
-  </mat-form-field>
-  <button
-    mat-raised-button
-    color="primary"
-    style="margin-left: 15px"
-    (click)="emitSearchField()"
-  >
-    Ok
-  </button>
-</form>
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input matInput [formControl]="searchField" />
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="emitSearchField()">
+  Ok
+</button>

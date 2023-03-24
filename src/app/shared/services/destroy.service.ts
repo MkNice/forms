@@ -1,14 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class DestroyService extends ReplaySubject<boolean> implements OnDestroy {
-
-  constructor() {
-    super(1);
-  }
+@Injectable()
+export class DestroyService extends Subject<boolean> implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.next(true);

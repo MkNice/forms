@@ -11,7 +11,7 @@ import { IConfirmDialog, IDialogForm } from '../../interfaces/dialogs.interface'
 })
 export class ConfirmDialogComponent {
 
-  public datasss: IConfirmDialog = {
+  public dataDialog: IConfirmDialog = {
     isConfirm: false,
     idForms: this.dialogForm.idForm,
   };
@@ -21,7 +21,7 @@ export class ConfirmDialogComponent {
   ) { }
 
   public isApprove(): void {
-    this.datasss.isConfirm = true;
-    this.dialogRef.close(this.datasss);
+    this.dataDialog.isConfirm = true;
+    this.dialogRef.close(this.dataDialog);
   }
 }

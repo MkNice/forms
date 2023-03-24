@@ -49,7 +49,7 @@ export class FormsAPIService {
     return this.http.post(this.url, {
       "form_field_values": [
         {
-          "form_field_id": 1,
+          "form_field_id": params.id,
           "value": `${params.valueForChange}`
         }
       ]

@@ -1,0 +1,7 @@
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input matInput [formControl]="searchField" />
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="emitSearchField()">
+  Ok
+</button>

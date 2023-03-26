@@ -1,0 +1,43 @@
+  <form [formGroup]="formsData">
+    <div class="inputs-wrapper" *ngIf="dialogForm.action === 'edit'">
+      <div class="item">
+        <mat-form-field>
+          <mat-label>forms fields id</mat-label>
+          <mat-select formControlName="id">
+            <mat-option
+              *ngFor="let formFieldData of dialogForm.formFieldId"
+              [value]="formFieldData.form_field_id"
+              (click)="checkData('id')"
+            >
+              {{ formFieldData.form_field_id }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="item">
+        <mat-form-field>
+          <mat-label>value</mat-label>
+          <mat-select formControlName="value">
+            <mat-option
+              *ngFor="let formFieldData of dialogForm.formFieldId"
+              [value]="formFieldData.value"
+              (click)="checkData('value')"
+            >
+              {{ formFieldData.value }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="item">
+      <mat-form-field>
+        <mat-label>value</mat-label>
+        <input formControlName="valueForChange" matInput type="text" />
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="btns">
+    <button mat-raised-button color="primary" (click)="setData()">
+      Сохранить
+    </button>
+    <button mat-raised-button color="basic" [mat-dialog-close]>Отменить</button>
+  </div>

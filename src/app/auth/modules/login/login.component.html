@@ -1,0 +1,28 @@
+<section class="form-wrapper">
+  <form class="auth-form" [formGroup]="dataFormGroup">
+    <mat-form-field class="input">
+      <mat-label>Email</mat-label>
+      <input
+        maxlength="50"
+        placeholder="Email"
+        matInput
+        formControlName="email"
+        autocomplete="on"
+      />
+    </mat-form-field>
+    <mat-form-field class="input">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        name="password"
+        maxlength="16"
+        matInput
+        placeholder="Password"
+        formControlName="password"
+        autocomplete="on"
+      />
+    </mat-form-field>
+
+    <button class="btn btn-primary" (click)="onSubmit()">Войти</button>
+  </form>
+</section>

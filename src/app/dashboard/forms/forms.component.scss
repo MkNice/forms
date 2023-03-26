@@ -1,0 +1,87 @@
+p {
+  margin: 0;
+}
+
+.filters{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table {
+  overflow: auto;
+  border: 1px solid grey;
+  border-radius: 15px;
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow-y: auto;
+  max-height: calc(100vh - 120px - 120px - 50px - 20px);
+
+  .header {
+    display: flex;
+    align-items: center;
+    background-color: #241178;
+    color: white;
+    width: auto;
+
+    p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 30px;
+      font-weight: 500;
+      padding: 15px;
+      font-size: 16px;
+      border-right: 1px solid grey;
+      word-break: normal;
+      height: 50px;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    font-size: 16px;
+    &-cell {
+      padding: 20px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid grey;
+      max-width: 275px;
+      word-break: break-word;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  .id {
+    width: 25%;
+    cursor: pointer;
+  }
+
+  .user-id {
+    width: 25%;
+  }
+
+  .type {
+    width: 25%;
+  }
+
+  .created-data {
+    width: 29%;
+  }
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}

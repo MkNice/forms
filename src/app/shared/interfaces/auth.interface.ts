@@ -32,6 +32,8 @@ export type IFormFieldValues = Pick<IFormsData, 'id' | 'type' | 'created_at' | '
   value: string,
 };
 
+export type bodyForms = { form_field_values: Pick<IFormFieldValues, 'form_field_id' | 'value'>[]; }
+
 export interface IParams {
   pageSize: number,
   maxSizePages: number[],

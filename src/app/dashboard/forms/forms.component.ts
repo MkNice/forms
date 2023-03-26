@@ -47,7 +47,7 @@ export class FormsComponent implements OnInit {
 
     this.formsApi.getForms(this.paramsForApi)
       .pipe(
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe((formsData: IForms) => {
         this.formsData = formsData.data;

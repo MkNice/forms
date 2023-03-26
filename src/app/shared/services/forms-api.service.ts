@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IParams, IForms } from '../interfaces/auth.interface';
+import { IParams, IForms, bodyForms } from '../interfaces/auth.interface';
 import { IOptionsDialogData } from '../interfaces/dialogs.interface';
 
 @Injectable({
@@ -28,37 +28,36 @@ export class FormsAPIService {
       httpParams = httpParams.set('created_at,', params.filterByData);
     }
 
-
     return this.http.get<IForms>(this.url, { params: httpParams });
   }
 
   public patchFormValues(params: IOptionsDialogData) {
     const url = `${this.url}/${params.idForm}`;
+    const body = this.getBody(params.id, params.valueForChange);
 
-    return this.http.post(url, {
-      "form_field_values": [
-        {
-          "form_field_id": params.id,
-          "value": `${params.valueForChange}`
-        }
-      ]
-    });
+    return this.http.post(url, body);
   }
 
   public postForm(params: IOptionsDialogData) {
-    return this.http.post(this.url, {
-      "form_field_values": [
-        {
-          "form_field_id": params.id,
-          "value": `${params.valueForChange}`
-        }
-      ]
-    });
+    const body = this.getBody(params.id, params.valueForChange);
+
+    return this.http.post(this.url, body);
   }
 
   public deleteForm(id: number) {
     const url = `${this.url}/${id}`;
 
     return this.http.delete(url);
+  }
+
+  private getBody(id: number, valueForChange: string): bodyForms {
+    return {
+      "form_field_values": [
+        {
+          "form_field_id": id,
+          "value": valueForChange
+        }
+      ]
+    };
   }
 }
